@@ -1,35 +1,48 @@
 package hbcu.stay.ready.algor;
+import java.util.*;
 
 public class Solution {
 
     public String countUniqueWords(String input) {
-        String words = "";
+        String words = ""; // empty string to enter words in
 
-        int count = 0 ;
+        HashMap<String, Integer> hashy = new HashMap<String, Integer>();
 
-        for ( count = 0; count < input.length(); count++);
+        // hashmap is with key and value, every key is unique, and you find the value
+        //
 
-        String [] x = input.split("");
+        String[] stringedInput = input.split("\\W+"); //split the input string at space
 
-        String [] y = input.split(".");
-
-        {
-            
-
+        for(String key : stringedInput){
+            if(!hashy.containsKey(key)) {
+                hashy.put(key, 1);
+            }
+            else {
+                int currentValue = hashy.get(key);
+                currentValue++;
+                hashy.put(key, currentValue);
+            }
         }
 
 
-
-        {
-
-            System.out.print("The 3 unique words are"+ "\n");
-            System.out.println("Hello Seen" + "");
-
-
-
+        words += String.format("The %d unique words are:\n", hashy.size());
+        int size = 0;
+        for (String x : hashy.keySet()) {
+            size++;
+            int value = hashy.get(x);
+            if (size < hashy.size()) {
+                words += String.format("%s (Seen %d)\n", x, value );
+            }
+            else {
+                words += String.format("%s (Seen %d)", x, value );
+            }
         }
 
+        return words;
 
-                return input;
+
+
+
+
     }
 }
